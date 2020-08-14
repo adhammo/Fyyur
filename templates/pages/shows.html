@@ -1,0 +1,40 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Fyyur | Shows{% endblock %}
+{% block content %}
+<section>
+    <h2 class="monospace">{% if shows.upcoming_shows_count == 0 %}No{% else %}{{ shows.upcoming_shows_count }}{% endif %} Upcoming {% if shows.upcoming_shows_count == 1 %}Show{% else %}Shows{% endif %}</h2>
+    <div class="row shows">
+        {%for show in shows.upcoming_shows %}
+        <div class="col-sm-4">
+            <div class="tile tile-show" style="height: 400px;">
+                <img src="{{ show.artist_image_link }}" alt="Artist Image" />
+                <h4>{{ show.start_time|datetime('full') }}</h4>
+                <h5><a href="/artists/{{ show.artist_id }}">{{ show.artist_name }}</a></h5>
+                <p>playing at</p>
+                <h5><a href="/venues/{{ show.venue_id }}">{{ show.venue_name }}</a></h5>
+                <a title="Edit Show" href="/shows/{{ show.id }}/edit" style="margin-right: 1rem;"><i class="fa fa-edit"></i></a>
+                <a class="delete" title="Delete Show" href="#" data-name="shows" data-id="{{ show.id }}"><i class="fa fa-window-close"></i></a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+<section>
+    <h2 class="monospace">{% if shows.past_shows_count == 0 %}No{% else %}{{ shows.past_shows_count }}{% endif %} Past {% if shows.past_shows_count == 1 %}Show{% else %}Shows{% endif %}</h2>
+    <div class="row shows">
+        {%for show in shows.past_shows %}
+        <div class="col-sm-4">
+            <div class="tile tile-show" style="height: 400px;">
+                <img src="{{ show.artist_image_link }}" alt="Artist Image" />
+                <h4>{{ show.start_time|datetime('full') }}</h4>
+                <h5><a href="/artists/{{ show.artist_id }}">{{ show.artist_name }}</a></h5>
+                <p>playing at</p>
+                <h5><a href="/venues/{{ show.venue_id }}">{{ show.venue_name }}</a></h5>
+                <a title="Edit Show" href="/shows/{{ show.id }}/edit" style="margin-right: 1rem;"><i class="fa fa-edit"></i></a>
+                <a class="delete" title="Delete Show" href="#" data-name="shows" data-id="{{ show.id }}"><i class="fa fa-window-close"></i></a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
